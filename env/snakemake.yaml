@@ -1,0 +1,6 @@
+name:
+channels:
+ - bioconda
+ - defauls
+dependencies:
+ - snakemake

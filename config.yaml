@@ -1,0 +1,13 @@
+reads: ['test1.bam', 'test2.bam'] # copy your bam files here, multiple files provided as a comma-separated list
+asm: "asm.fa" # genome assembly here, in FASTA format
+threads:
+    ccs: 24
+    primrose: 24
+    pbmm2: 24
+    cpg: 24
+params:
+    pbmm2: "--preset CCS --sort"
+    cpg:
+        opt: "-p model --modsites reference"
+        modeldir: "pileup_calling_model"
+        script: "scripts/aligned_bam_to_cpg_scores.py"
