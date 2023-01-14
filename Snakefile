@@ -93,7 +93,7 @@ rule aln_to_cpg_scores:
             -b {input.bam} \
             -f {input.ref} \
             -o data/cpg/{wildcards.reads} \
-            -d {params.modeldir}
+            -d {params.modeldir} \
             {params.opt} \
             -t {threads} \
             > {log} 2>&1
