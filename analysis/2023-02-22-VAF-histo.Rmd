@@ -1,0 +1,64 @@
+---
+title: "Red Polenta VAF Histograms"
+author: KRA
+date: 2023-02-22
+output: html_notebook
+---
+
+Aim: Histogram variant allele frequency for putatively
+L1-specific variants in potato cv. "Red Polenta", a.k.a.
+PI310467.
+
+# Packages:
+```{r}
+library(tidyverse)
+```
+
+# Read in data
+```{r}
+# layer-specific mutation calls, vetted by KRA VCF parsing + manual inspection
+mut <- read_tsv("layer_mutations_pctg.tsv",
+         col_names = T,
+         na = "NA")
+head(mut)
+```
+
+> Looks like a table of mutations. To histogram the variant allele
+frequency, open up the PI310467 sample-specific attributes. I typically
+do this in two steps.
+
+```{r}
+# Step 1: Check that the FORMAT column is unique across all rows of the data frame
+unique(mut$FORMAT)
+```
+
+```{r}
+# assign a new vector called attributes, which splits the first row of the FORMAT column by colon
+# works if all rows have the same FORMAT, otherwise rowwise() is needed
+attributes <- unique(mut$FORMAT) %>% 
+  str_split(pattern = ":") %>% # splits a string into a list
+  pluck(1) # collect first thing in a list
+attributes # did it work?
+```
+
+> Looks good.
+
+```{r}
+# then, a call to separate() divides the PI310467 column into its attributes 
+mut %>% 
+  head %>% 
+  separate(PI310467, into = paste("PI310467", attributes, sep = "_"), sep = ":", convert = T) 
+```
+
+> With the PI310467 column split into variables defined by FORMAT,
+a few quick ggplot calls will make the histograms we're after.
+Here's an example with the first 200 rows:
+
+```{r}
+mut %>% 
+  head(200) %>% 
+  separate(PI310467, into = paste("PI310467", attributes, sep = "_"), sep = ":", convert = T) %>% 
+  ggplot(., aes(x = PI310467_DP)) +
+  geom_histogram(binwidth = 1)
+```
+

@@ -8,6 +8,6 @@ threads:
 params:
     pbmm2: "--preset CCS --sort"
     cpg:
-        opt: "-p model --modsites reference"
+        opt: "-p model --modsites denovo"
         modeldir: "pileup_calling_model"
         script: "scripts/aligned_bam_to_cpg_scores.py"
