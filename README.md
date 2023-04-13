@@ -59,15 +59,19 @@ in the ```primrose_doall/data/subreads``` folder.
 Similarly, put your assembly in the folder ```primrose_doall/asm```, then in ```config.yaml```
 replace ```asm.fa``` with the name of your genome assembly file.
 
-2. Rerun the workflow with the modified ```config.yaml``` file
+2. Rerun the workflow with the modified ```config.yaml``` file. CPU usage can be adjusted as needed.
 
 ```
 snakemake --configfile config_mod.yaml --cores 24
 ```
 
-You can adjust CPU usage as needed by changing the number provided to ```--cores```
+Alternatively, to run on a cluster, edit ```cluster.yaml``` to suit your needs, then run with:
 
-In the future I will add support for multiple reference genomes and cluster parallelization
+```
+sbatch primrose_doall.slurm
+```
+
+In the future I will add support for multiple reference genomes
 
 [1]: https://github.com/PacificBiosciences/primrose
 [2]: https://ccs.how/

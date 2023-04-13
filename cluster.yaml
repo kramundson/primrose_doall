@@ -1,0 +1,34 @@
+{
+    "__default__" :
+    {
+        "account" : "kramundson",
+        "time" : "12:00:00",
+        "c" : 1,
+        "n" : 1,
+        "partition" : "production",
+        "mempercpu" : "2G"
+    },
+    "ccs_kinetics" :
+    {
+        "time" : "3-00:00:00",
+        "c" : 24,
+        "mempercpu" : "5G"
+    },
+    "primrose" :
+    {
+        "time" : "3-00:00:00",
+        "c" : 24,
+        "mempercpu" : "100M"
+     },
+    "align_5mC" :
+    {
+        "time" : "1-00:00:00",
+        "c" : 24,
+        "mempercpu" : "2G"
+    },
+    "aln_to_cpg_scores" :
+    {
+        "time" : "3-00:00:00",
+        "c" : 24
+    }
+}
